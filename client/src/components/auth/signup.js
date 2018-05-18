@@ -18,6 +18,16 @@ class Signup extends Component {
     handleFormSubmit({ email, password }){
         this.props.signupUser({ email, password })
     }
+
+    renderAlert(){
+        if(this.props.errorMessage){
+            return (
+                <div className="alert alert-danger">
+                    <strong>Oops!</strong> { this.props.errorMessage }
+                </div>
+            )
+        }
+    }
     
     render() {
         const { handleSubmit } = this.props
@@ -28,6 +38,7 @@ class Signup extends Component {
                 <Field name="password" component={ renderInput } type="password" label="Password:" />
                 <Field name="passwordConfirm" component={ renderInput } type="password" label="Confirm Passowrd:"/>
                 <button action="submit" className="btn btn-primary">Sign Up</button>
+                { this.renderAlert() }
             </form>
         )
     }
